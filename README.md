@@ -141,35 +141,32 @@ Then install [Homebrew](https://brew.sh).
 
 ##### 2) Dependencies
 
-    brew install cmake automake berkeley-db4 libtool --c++11 --without-single --without-static miniupnpc openssl pkg-config protobuf qt5 libevent imagemagick --with-librsvg qrencode
+    brew install cmake automake berkeley-db4 libtool boost --c++11 --without-single --without-static miniupnpc openssl pkg-config qt5 libevent imagemagick --with-librsvg qrencode
+
+protobuf install(The version of brew is too high):
+	
+	wget https://github.com/google/protobuf/archive/	v3.5.1.tar.gz
+	tar -xzvf v3.5.1.tar.gz
+	cd protobuf-3.5.1/ 
+	./autogen.sh 
+	./configure
+	make 
+	make check
+	make install
+	protoc --version
 
 NOTE: Building with Qt4 is still supported, however, could result in a broken UI. Building with Qt5 is recommended.
 
-##### 3) Install boost
-######1. Clone Homebrew source code and cd into `homebrew-core`
 
-        git clone https://github.com/Homebrew/homebrew-core.git
-	
-######2. check boost commit log
-		
-		 git log ./Formula/boost.rb | less
-		 
-######3. checkout git HEAD to commitId: 6308e2c01c0821f899acd75e47321cd3aa882680 ( boost --version 1.66.0)
-		
-		git checkout 6308e2c01c0821f899acd75e47321cd3aa882680
-	
-######4. brew install boost
-		
-		brew install ./Formula/boost.rb
 
 NOTE: the support boost version must be 1.66 or less 1.60
 
-##### 4) Build Qtc Core
+##### 3) Build Qtc Core
 
 ######1. Clone the qtc source code and cd into `qtc`
 
         git clone --recursive http://43.254.148.146:83/QbaoChain/perfect.git
-        cd qtc
+        cd perfect
 
 ######2.  Build qtc-core:
 
@@ -185,7 +182,7 @@ NOTE: the support boost version must be 1.66 or less 1.60
 
         make check
         
-#### 5) Initialization Parameter Configuration
+#### 4) Initialization Parameter Configuration
 ######1. mkdir qtc folder and touch qtc.conf
 		
 		mkdir /Users/$UserName/Library/Application\ Support/Qtc
@@ -211,7 +208,6 @@ Note: replace $UserName to your computer name
 	chain=cup
 	server=1
 	addnode=47.100.27.65
-	addnode=172.16.3.60
 	#debug=zmq
 	maxmempool=100000
 
