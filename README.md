@@ -74,9 +74,14 @@ This is a quick start script for compiling Qtc on  Ubuntu.
 	tar -xzvf v3.5.1.tar.gz
 	cd protobuf-3.5.1/ 
 	./autogen.sh 
-	./configure --prefix=/usr/local/protobuf 
+	./configure
 	make -j8 && make install 
-	ldconfig
+	
+	1. 创建文件 /etc/ld.so.conf.d/libprotobuf.conf 包含内容：
+	/usr/local/lib
+	输入命令 
+	sudo ldconfig
+	这时，再运行protoc –version 就可以正常看到版本号了
 
 #####2.Installing Dependencies for Qtc
 
